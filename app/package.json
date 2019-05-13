@@ -1,0 +1,28 @@
+{
+    "name": "app-tareas",
+    "version": "1.0.0",
+    "description": "App de guardar tareas utilizando ES6, nodejs, browserify...",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "public": "if not exist public mkdir public",
+        "build-js": "browserify -t [ babelify --presets [ @babel/preset-env ] ] index.js> public/app.js ",
+        "copyfiles": "cp index.css public/app.css && cp index.html public/index.html",
+        "build": "npm run public && npm run build-js && npm run copyfiles",
+        "serve": "serve public"
+    },
+    "author": "Mauricio Barva",
+    "license": "MIT",
+    "dependencies": {
+        "jquery": "^3.4.1",
+        "serve": "^11.0.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.4.4",
+        "@babel/core": "^7.4.4",
+        "@babel/preset-env": "^7.4.4",
+        "babel-core": "^6.26.3",
+        "babelify": "^10.0.0",
+        "browserify": "^16.2.3"
+    }
+}
