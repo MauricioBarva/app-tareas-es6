@@ -1,7 +1,5 @@
 import $ from 'jquery';
 
-
-
 function getTasks() {
     return fetch('http://localhost:3500/tasks');
 }
