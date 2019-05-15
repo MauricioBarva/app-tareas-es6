@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Mauricio Barva" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>App tareas</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+    <header>
+        <h2>Lista de tareas</h2>
+        <h2>Agregar Tareas</h2>
+    </header>
+    <div id="lista-tareas">
+    </div>
+
+    <div id="task-form">
+        <form id="formulario" method="POST">
+            <p>
+                <label for="name-task">Nombre</label>
+                <input type="text" name="name-task" id="name-task" required>
+            </p>
+
+            <p>
+                <label for="matter-task">Materia</label>
+                <input type="text" name="matter-task" id="matter-task" required>
+            </p>
+
+            <p>
+                <label for="teacher-task">Profesor</label>
+                <input type="text" name="teacher-task" id="teacher-task" required>
+            </p>
+
+            <p>
+                <label for="description-task">Descripción</label>
+                <textarea name="description-task" id="description-task"></textarea>
+            </p>
+
+            <p>
+                <label for="date-task">Fecha</label>
+                <input type="date" name="date-task" id="date-task" required>
+            </p>
+
+            <p>
+                <label for="hour-task">Hora</label>
+                <input type="text" name="hour-task" id="name-task">
+            </p>
+
+            <input type="submit" value="Agregar">
+        </form>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -3,22 +3,35 @@ body {
     margin: 0;
 }
 
+header {
+    display: flex;
+    justify-content: space-around;
+}
+
+header h2 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    letter-spacing: 4px;
+    color: rgb(21, 70, 40);
+}
+
 #lista-tareas {
-    background: whitesmoke;
     width: 42%;
     float: left;
     overflow: scroll;
+    margin-left: 46px;
     max-height: 89.9vh;
+    max-width: 800px;
     border-radius: 6px;
 }
 
 .tareas {
     width: 100%;
-    background: #eee;
+    background: rgb(52, 109, 93, 0.6);
     position: relative;
     padding: 5px;
     box-shadow: 0px 0px 3px black;
     padding-bottom: 20px;
+    width: 540px;
 }
 
 label {
@@ -30,13 +43,13 @@ label {
 .editar {
     position: absolute;
     top: 10px;
-    right: 96px;
+    right: 84px;
     padding: 6px;
     border-radius: 6px;
     border: 0;
     outline: 0;
     cursor: pointer;
-    background: rgb(182, 182, 182);
+    background: #fff;
     transition: all 400ms;
 }
 
@@ -47,26 +60,26 @@ label {
 .borrar {
     position: absolute;
     top: 10px;
-    right: 30px;
+    right: 25px;
     padding: 6px;
     border-radius: 6px;
     border: 0;
     outline: 0;
     cursor: pointer;
-    background: rgb(182, 182, 182);
+    background: #fff;
     transition: all 400ms;
 }
 
 .guardar {
-    padding: 6px;
-    border-radius: 6px;
+    padding: 5px;
+    margin-left: 28px;
+    border-radius: 5px;
     border: 0;
-    width: 55%;
+    width: 57%;
     outline: 0;
     cursor: not-allowed;
-    background: rgb(182, 182, 182);
+    background: #ccc;
     transition: all 400ms;
-    margin-left: 30px;
 }
 
 .borrar:hover {
@@ -74,6 +87,7 @@ label {
 }
 
 input[type="text"],
+input[type="date"],
 textarea,
 label {
     padding: 3px;
@@ -86,4 +100,31 @@ label {
 
 textarea {
     min-height: 70px;
+}
+
+#task-form {
+    background: rgb(52, 109, 93, 0.6);
+    float: right;
+    margin-right: 65px;
+    width: 42%;
+    height: 87vh;
+    border-radius: 6px;
+}
+
+#task-form input[type="text"],
+#task-form textarea,
+#task-form input[type="date"],
+#task-form input[type="submit"] {
+    width: 89% !important;
+}
+
+#task-form input[type="submit"] {
+    margin-top: 10px;
+    margin-left: 35px;
+    background: #ccc;
+    padding: 10px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    border-radius: 6px;
 }

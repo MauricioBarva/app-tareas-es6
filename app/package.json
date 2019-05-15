@@ -6,8 +6,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "public": "if not exist public mkdir public",
-        "build-js": "browserify -t [ babelify --presets [ @babel/preset-env ] ] index.js> public/app.js ",
-        "copyfiles": "cp index.css public/app.css && cp index.html public/index.html",
+        "build-js": "browserify -t [ babelify --presets [ @babel/preset-env ] ] src/index.js > public/app.js",
+        "copyfiles": "cp src/index.css public/app.css && cp src/index.html public/index.html",
         "build": "npm run public && npm run build-js && npm run copyfiles",
         "serve": "serve public"
     },
@@ -15,6 +15,7 @@
     "license": "MIT",
     "dependencies": {
         "jquery": "^3.4.1",
+        "page": "^1.11.4",
         "serve": "^11.0.0"
     },
     "devDependencies": {
