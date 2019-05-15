@@ -7,7 +7,7 @@ mongoose.Promise = global.Promise;
 var app = require('./app');
 var port = 3500;
 
-mongoose.connect('mongodb://localhost:27017/tareas', { useNewUrlParser: true, useFindAndModify: true })
+mongoose.connect('mongodb://localhost:27017/tareas', { useNewUrlParser: true, useFindAndModify: false })
     .then(() => {
         console.log('The db is running...');
         //Put the server to listen

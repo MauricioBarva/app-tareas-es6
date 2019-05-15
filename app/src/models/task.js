@@ -7,28 +7,4 @@ export default class Task {
         this.date = date;
         this.hour = hour;
     }
-
-    setName(name) {
-        this.name = name;
-    }
-
-    setMatter(matter) {
-        this.matter = matter;
-    }
-
-    setTeacher(teacher) {
-        this.teacher = teacher;
-    }
-
-    setDescription(description) {
-        this.description = description;
-    }
-
-    setDate(date) {
-        this.date = date;
-    }
-
-    setHour(hour) {
-        this.hour = hour;
-    }
 }

@@ -7,9 +7,11 @@ import page from 'page';
 import container from '../task-container/index';
 import Task from '../models/task';
 
-export var taskToUpdate = new Task('', '', '', '', '', '');
+export var taskToUpdate;
 
 export default function renderTasks(shows) {
+    var id, nameToEdit, matterToEdit, teacherToEdit, descriptionToEdit, dateToEdit, hourToEdit, question,
+        taskToBeUpdated, arrayTasks;
     shows.forEach(elemento => {
         var template = `
         <div id="divid" class="tareas">
@@ -57,8 +59,8 @@ export default function renderTasks(shows) {
         /*Cuando le de click a este boton, busca en la etiqueta más cercana que tenga
         la clase [ .tareas ], encuentrame el input con id name y devuelveme el valor contenido
         dentro del atributo name*/
-        var id = $(this).closest('.tareas').find('input[id="name"]').attr('name');
-        var question = confirm('¿Are you sure to delete?')
+        id = $(this).closest('.tareas').find('input[id="name"]').attr('name');
+        question = confirm('¿Are you sure to delete?')
         if (question) {
             page('/delete-task/' + id);
         } else {
@@ -69,55 +71,50 @@ export default function renderTasks(shows) {
     $('.editar').click(function() {
         /**
          * Aquí le digo, parese en el div que tenga la clase .tareas y encuentreme
-         * el input que tenga el id="name" y pongame su atributo disabled a false,
-         * se repite el proceso con los demas inputs
+         * el input que tenga el id="name", los guardo en un array y le digo por cada elemento
+         *  pongame su atributo disabled a false
          */
-        var nameToEdit = $(this).closest('.tareas').find('input[id="name"]');
-        nameToEdit.attr('disabled', false);
-        var matterToEdit = $(this).closest('.tareas').find('input[id="matter"]');
-        matterToEdit.attr('disabled', false);
-        var teacherToEdit = $(this).closest('.tareas').find('input[id="teacher"]');
-        teacherToEdit.attr('disabled', false);
-        var descriptionToEdit = $(this).closest('.tareas').find('textarea[id="description"]');
-        descriptionToEdit.attr('disabled', false);
-        var dateToEdit = $(this).closest('.tareas').find('input[name="date"]');
-        dateToEdit.attr('disabled', false);
-        var hourToEdit = $(this).closest('.tareas').find('input[id="hour"]');
-        hourToEdit.attr('disabled', false);
+        id = $(this).closest('.tareas').find('input[id="name"]').attr('name');
+        nameToEdit = $(this).closest('.tareas').find('input[id="name"]');
+        matterToEdit = $(this).closest('.tareas').find('input[id="matter"]');
+        teacherToEdit = $(this).closest('.tareas').find('input[id="teacher"]');
+        descriptionToEdit = $(this).closest('.tareas').find('textarea[id="description"]');
+        dateToEdit = $(this).closest('.tareas').find('input[name="date"]');
+        hourToEdit = $(this).closest('.tareas').find('input[id="hour"]');
+        arrayTasks = [nameToEdit, matterToEdit, teacherToEdit, descriptionToEdit, dateToEdit, hourToEdit];
+        arrayTasks.forEach(elemento => {
+            elemento.attr('disabled', false);
+        });
         $('.guardar').css('cursor', 'pointer').attr('disabled', false);
+        page('/update-task/' + id);
+
     });
+
     $('.guardar').click(function() {
         /**
          * Lo mismo, parese en el div que tenga id="name" y deme el valor que esta 
          * en el atributto name, en este name, guardé el id que me llega del proyecto
          * para poder editarlo desde el backend. Luego pongo los pongo en disabled otra vez. 
-         * Entonces a mi clase Task que voy a enviar en el fetch por PUT le asigno los 
-         * valores que están dentro de los inputs, al momento de dar guardar, 
-         * luego le envio el id y una variable, en este caso taskToBeUpdated
-         * para poder hacer la petición.
+         * Entonces a mi var taskToUpdate que voy a enviar en el fetch por PUT digo que va a ser
+         * un new Task y le asigno los valores que están dentro de los inputs, al momento de dar guardar, 
+         * luego le envio una variable, en este caso taskToBeUpdated
+         * para poder hacer lo de la petición.
          * 
          */
-        var id = $(this).closest('.tareas').find('input[id="name"]').attr('name');
-        var nameToEdit = $(this).closest('.tareas').find('input[id="name"]');
-        nameToEdit.attr('disabled', true);
-        var matterToEdit = $(this).closest('.tareas').find('input[id="matter"]');
-        matterToEdit.attr('disabled', true);
-        var teacherToEdit = $(this).closest('.tareas').find('input[id="teacher"]');
-        teacherToEdit.attr('disabled', true);
-        var descriptionToEdit = $(this).closest('.tareas').find('textarea[id="description"]');
-        descriptionToEdit.attr('disabled', true);
-        var dateToEdit = $(this).closest('.tareas').find('input[name="date"]');
-        dateToEdit.attr('disabled', true);
-        var hourToEdit = $(this).closest('.tareas').find('input[id="hour"]');
-        hourToEdit.attr('disabled', true);
+        nameToEdit = $(this).closest('.tareas').find('input[id="name"]');
+        matterToEdit = $(this).closest('.tareas').find('input[id="matter"]');
+        teacherToEdit = $(this).closest('.tareas').find('input[id="teacher"]');
+        descriptionToEdit = $(this).closest('.tareas').find('textarea[id="description"]');
+        dateToEdit = $(this).closest('.tareas').find('input[name="date"]');
+        hourToEdit = $(this).closest('.tareas').find('input[id="hour"]');
         $(this).css('cursor', 'not-allowed').attr('disabled', true);
-        taskToUpdate.setName(nameToEdit.val());
-        taskToUpdate.setMatter(matterToEdit.val());
-        taskToUpdate.setTeacher(teacherToEdit.val());
-        taskToUpdate.setDescription(descriptionToEdit.val());
-        taskToUpdate.setDate(dateToEdit.val());
-        taskToUpdate.setHour(hourToEdit.val());
-        var taskToBeUpdated;
-        page('/update-task/' + id, taskToBeUpdated);
+        arrayTasks = [nameToEdit, matterToEdit, teacherToEdit, descriptionToEdit, dateToEdit, hourToEdit];
+        arrayTasks.forEach(elemento => {
+            elemento.attr('disabled', true);
+        });
+        taskToUpdate = new Task(nameToEdit.val(), matterToEdit.val(), teacherToEdit.val(), descriptionToEdit.val(),
+            dateToEdit.val(), hourToEdit.val());
+
+        page('/update-task/:id', taskToBeUpdated);
     });
 }
