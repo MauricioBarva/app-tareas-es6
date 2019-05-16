@@ -11,7 +11,7 @@ export var taskToUpdate;
 
 export default function renderTasks(shows) {
     var id, nameToEdit, matterToEdit, teacherToEdit, descriptionToEdit, dateToEdit, hourToEdit, question,
-        taskToBeUpdated, arrayTasks;
+        taskToBeUpdated, arrayTasks, select;
     shows.forEach(elemento => {
         var template = `
         <div id="divid" class="tareas">
@@ -39,7 +39,7 @@ export default function renderTasks(shows) {
 
         <p>
         <label for="date">Fecha</label>
-        <input type="date" name="date" id="date" value="${elemento.date}" disabled>
+        <input type="date" name="date" id="date" navigation="true" value="${elemento.date}" disabled>
         </p>
 
         <p>
@@ -51,6 +51,7 @@ export default function renderTasks(shows) {
         `
 
         container.append(template);
+
     });
 
 
@@ -74,13 +75,15 @@ export default function renderTasks(shows) {
          * el input que tenga el id="name", los guardo en un array y le digo por cada elemento
          *  pongame su atributo disabled a false
          */
-        id = $(this).closest('.tareas').find('input[id="name"]').attr('name');
-        nameToEdit = $(this).closest('.tareas').find('input[id="name"]');
-        matterToEdit = $(this).closest('.tareas').find('input[id="matter"]');
-        teacherToEdit = $(this).closest('.tareas').find('input[id="teacher"]');
-        descriptionToEdit = $(this).closest('.tareas').find('textarea[id="description"]');
-        dateToEdit = $(this).closest('.tareas').find('input[name="date"]');
-        hourToEdit = $(this).closest('.tareas').find('input[id="hour"]');
+        select = $(this);
+        select.css('cursor', 'not-allowed').attr('disabled', true);
+        id = select.closest('.tareas').find('input[id="name"]').attr('name');
+        nameToEdit = select.closest('.tareas').find('input[id="name"]');
+        matterToEdit = select.closest('.tareas').find('input[id="matter"]');
+        teacherToEdit = select.closest('.tareas').find('input[id="teacher"]');
+        descriptionToEdit = select.closest('.tareas').find('textarea[id="description"]');
+        dateToEdit = select.closest('.tareas').find('input[name="date"]');
+        hourToEdit = select.closest('.tareas').find('input[id="hour"]');
         arrayTasks = [nameToEdit, matterToEdit, teacherToEdit, descriptionToEdit, dateToEdit, hourToEdit];
         arrayTasks.forEach(elemento => {
             elemento.attr('disabled', false);
@@ -101,13 +104,15 @@ export default function renderTasks(shows) {
          * para poder hacer lo de la petición.
          * 
          */
-        nameToEdit = $(this).closest('.tareas').find('input[id="name"]');
-        matterToEdit = $(this).closest('.tareas').find('input[id="matter"]');
-        teacherToEdit = $(this).closest('.tareas').find('input[id="teacher"]');
-        descriptionToEdit = $(this).closest('.tareas').find('textarea[id="description"]');
-        dateToEdit = $(this).closest('.tareas').find('input[name="date"]');
-        hourToEdit = $(this).closest('.tareas').find('input[id="hour"]');
-        $(this).css('cursor', 'not-allowed').attr('disabled', true);
+        select = $(this);
+        nameToEdit = select.closest('.tareas').find('input[id="name"]');
+        matterToEdit = select.closest('.tareas').find('input[id="matter"]');
+        teacherToEdit = select.closest('.tareas').find('input[id="teacher"]');
+        descriptionToEdit = select.closest('.tareas').find('textarea[id="description"]');
+        dateToEdit = select.closest('.tareas').find('input[name="date"]');
+        hourToEdit = select.closest('.tareas').find('input[id="hour"]');
+        select.attr('disabled', true).css('cursor', 'not-allowed');
+        $('.editar').css('cursor', 'pointer').attr('disabled', false);
         arrayTasks = [nameToEdit, matterToEdit, teacherToEdit, descriptionToEdit, dateToEdit, hourToEdit];
         arrayTasks.forEach(elemento => {
             elemento.attr('disabled', true);
